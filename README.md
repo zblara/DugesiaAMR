@@ -1,7 +1,7 @@
 # DugesiaAMR
 This pipeline aims to process raw DNA sequencing data for in silico AMR gene detection and quantification. Results could be used for further downstream analysis in R Studio.
 
-## System Requirements
+### System Requirements
 ###  Hardware:
 • An x86-compatible platform compatible with the indicated OS and programs \
 • At least 2GB of RAM, a mouse, and enough disk space for output files \
