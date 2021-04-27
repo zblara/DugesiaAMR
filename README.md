@@ -1,5 +1,5 @@
 # DugesiaAMR
-This pipeline aims to process raw metagenomic sequencing data for in silico AMR gene detection and quantification. Results could be used for further downstream analysis in R Studio.
+This pipeline aims to process raw metagenomic sequencing data for direct, in silico AMR gene detection and quantification. Results could be used for further downstream analysis in R Studio. This pipeline and accompanying research is not in any way related to the study of members of the Dugesiid family, although it is the favorite taxon of the authors.
 
 ### System Requirements
 ###  Hardware:
