@@ -1,8 +1,6 @@
 #!/bin/bash 
 
 #insert SLURM/sbatch variables here if any
- 
-echo "working directory = "$SLURM_SUBMIT_DIR 
 
 ulimit -s unlimited 
 
