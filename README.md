@@ -20,4 +20,4 @@ This pipeline aims to process raw metagenomic sequencing data for direct, in sil
   ✓ megares_v2.00_bt2_index.zip - This contains the prebuilt Bowtie 2 indexes but the user may build their own updated index from the Megares complete annotation found at:      https://megares.meglab.org/download/index.php \
   ✓ megares.lengths - This contains the genelengths dependencies for procSam.pl (built using bioawk). 
     
-
+### ©2021, Z.B. Lara & C.Q. Llenado
