@@ -1,3 +1,14 @@
+################################################
+# 	
+#	  This R script is written by C. Q. Llenado 
+#
+#	  This script performs the visualization of the data from the previous pipeline.
+#		
+#	  Usage:
+#		  Open in R Studio. Make sure the following packages are installed, and run the necessary code chunks.
+#
+################################################
+
 ```{r}
 #Load Packages 
 library(tidyverse)
