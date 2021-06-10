@@ -19,5 +19,6 @@ This pipeline aims to process raw metagenomic sequencing data for direct, in sil
   ✓ procSam.pl - This is a necessary script for the DugesiaAMR pipeline \
   ✓ megares_v2.00_bt2_index.zip - This contains the prebuilt Bowtie 2 indexes but the user may build their own updated index from the Megares complete annotation found at:      https://megares.meglab.org/download/index.php \
   ✓ megares.lengths - This contains the genelengths dependencies for procSam.pl (built using bioawk). 
+  ✓ downstream_analysis.rmd - This is the R Markdown File which contains code for downstream statistical analysis and visualization
     
 ### ©2021, Z.B. Lara & C.Q. Llenado
