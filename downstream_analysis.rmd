@@ -1,0 +1,186 @@
+```{r}
+#Load Packages 
+library(tidyverse)
+library(data.table)
+library(gplots)
+library(RColorBrewer)
+library(compositions)
+library(vegan)
+library(ggfortify)
+library(compositions)
+library(stats)
+library(ggpubr)
+```
+
+```{r}
+#PALETTES 
+#Only applicable to RColorBrewer and built-in package of ggplot2
+#More information here: https://www.r-graph-gallery.com/ggplot2-color.html
+
+display.brewer.all()
+
+pal1 <- colorRampPalette(c("yellow", "orange", "red", "brown"))(n = 399)
+pal2 <- colorRampPalette(c("white","lightblue" ,"blue", "darkblue"))(n = 399)
+pal3 <- colorRampPalette(c("white", "lightgreen", "green", "darkgreen"))(n = 399)
+pal4 = colorRampPalette(brewer.pal(8, "PiYG"))(399)
+pal5 = colorRampPalette(brewer.pal(8, "Blues"))(399)
+pal6 = cm.colors(399)
+pal7 = terrain.colors(399)
+pal8 = colorRampPalette(brewer.pal(8, "YlOrBr")) (399)
+pal9 = colorRampPalette(brewer.pal(8, "BrBG")) (399)
+pal10 = colorRampPalette(brewer.pal(8, "Pastel1")) (399)
+```
+
+```{r}
+#ABUNDANCE HEAT MAP 
+#Code adapted from Adijailton Jose de Souza (2018) 
+#More information here: https://www.researchgate.net/publication/328080398_How_to_build_a_heatmap_in_R_relative_abundance_data
+
+
+cleangheatmap = read.delim("C:/Users/danec/Desktop/EXCEL G_AMR/CLEANGAMR.txt", 
+                           header = TRUE, stringsAsFactors = FALSE, quote = "")
+summary(cleangheatmap)
+view(cleangheatmap)
+genegroups <- cleangheatmap[,1]
+genegroups
+
+clean_gheatmap <- data.matrix(cleangheatmap[,2:ncol(cleangheatmap)])
+
+rownames(clean_gheatmap) <- genegroups
+rownames(clean_gheatmap)
+View(clean_gheatmap)
+
+max(clean_gheatmap)
+min(clean_gheatmap)
+median(clean_gheatmap)
+
+min(clean_gheatmap) #min value of dataset = 0, col_break = 0
+max(clean_gheatmap) #max value of dataset = 57, col_break ~ ~ 60
+
+col_breaks = c(seq(0, 15,length=100), # color 1
+               seq(16,30,length=100), # color 2
+               seq(31,45,length=100), # color 3
+               seq(46,60,length=100)) # color 4
+
+heatmap.2(clean_gheatmap,
+          main = "", # Heatmap title
+          notecol="black", # Change the font color of the cell labels to "black"
+          density.info="none", # Disables the density plot in the color legend.
+          trace="none", # Disable tracking lines within the heat map
+          margins =c(10,15), # Change margins
+          col=pal8, # Enable the color palette
+          breaks=col_breaks, # Enable color breakses
+          dendrogram="none", # Enable or Disable dendogram, options: "none", "col", "row" and "both". um dendrograma de coluna
+          Colv="NULL", # Disable column grouping, options: "NULL" and "TRUE"
+          Rowv="NULL") # Disable line grouping, options: "NULL" and "TRUE"
+```
+
+```{r}
+#STACKED BAR 
+names(g1tog3untidied)
+names(g1tog3untidied) <- c("Group","Abundance","Site")
+view(g1tog3untidied)
+
+
+colourCount = length(unique(g1tog3untidied$Group))
+colourCount = length(unique(G1TOG3$Group))
+
+getPalette = colorRampPalette(brewer.pal(9, "Set1"))
+
+gg_stackedbar <- ggplot(g1tog3untidied, aes(x=Site, y=Abundance, fill=Group, label = Site)) + 
+    geom_bar(position="fill", stat="identity", color = 'black') + 
+    scale_fill_manual(values = colorRampPalette(brewer.pal(9, "YlOrBr"))(colourCount)) +  
+    theme(legend.position="bottom") +
+    theme(legend.title = element_text(color = "black", size = 16), legend.text = element_text(color = "black", size = 11)) +
+    guides(fill=guide_legend(nrow=4)) +
+    coord_flip()
+
+gg_stackedbar
+```
+
+```{r}
+#PIE CHART
+pieG1TOG3 = read.delim("C:/Users/danec/Desktop/piechart_final.txt")
+pieG1TOG3
+class(pieG1TOG3)
+
+colourCount = length(unique(pieG1TOG3$Group))
+
+piechart <- ggplot(pieG1TOG3, aes(x="", y=Abundance, fill=Group, label = Group)) + 
+    geom_bar(position="fill",width = 1, stat="identity", color = 'black') 
+pie <- piechart + coord_polar("y", start=0) 
+pie + scale_fill_manual(values = colorRampPalette(brewer.pal(9, "YlOrBr"))(colourCount)) +
+      theme_void() 
+```
+
+```{r}
+#KRUSKAL-WALLIS TEST 
+
+shapiro.test(g.data.df$Abundance) #to check if normalized or not 
+
+my_data <- g1tog3untidied
+class(g1tog3untidied)
+
+g.data.df <- as.data.frame(g1tog3untidied)
+class(g.data.df)
+
+view(g.data.df)
+
+g.data.df = subset(g.data.df, select = -c(Site))
+view(g.data.df)
+
+kruskal.test(Abundance~Group, data = g.data.df)
+
+pairwise.wilcox.test(g.data.df$Abundance, g.data.df$Group,
+                     p.adjust.method = "none")
+
+levels(g.data.df$Group)
+g.data.df$Group <- ordered(g.data.df$Group, levels = c("A16S", "ACN", "ANT3-DPRIME", "BC", "BLAZ", "CAP16S", "CEOB", "CPT", "CTPC", "DNAK", "EMBB", "GYRA", "GYRBA", "MEXF", "MLS23S", "MUXB", "O23S", "OPMH", "OTRB", "PARC", "PARE", "RPOB", "RPSA", "RRSA", "RRSC", "RRSH", "TET16S", "TUFAB", "VANRO", "VANSO", "VANXB"))
+```
+
+```{r}
+#OTHERS: BOX PLOTS
+
+group_by(g.data.df, Group) %>%
+  summarise(
+    count = n(),
+    mean = mean(Abundance, na.rm = TRUE),
+    sd = sd(Abundance, na.rm = TRUE),
+    median = median(Abundance, na.rm = TRUE),
+    IQR = IQR(Abundance, na.rm = TRUE))
+
+ggboxplot(g.data.df, x = "Group", y = "Abundance", 
+          color = "Group", palette = NULL,
+          order = c("A16S", "ACN", "ANT3-DPRIME", "BC", "BLAZ", 
+                    "CAP16S", "CEOB", "CPT", "CTPC", "DNAK", 
+                    "EMBB", "GYRA", "GYRBA", "MEXF", "MLS23S", 
+                    "MUXB", "O23S", "OPMH", "OTRB", "PARC", "PARE", 
+                    "RPOB", "RPSA", "RRSA", "RRSC", "RRSH", "TET16S", 
+                    "TUFAB", "VANRO", "VANSO", "VANXB"),
+          ylab = "Abundance", xlab = "Gene Group")
+```
+
+```{r}
+#OTHERS: FINAL PCA (BETA DIVERSITY ANALYSIS)
+
+view(clean_gheatmap)
+colnames(clean_gheatmap) 
+clrf.data.pca <- clr(clean_gheatmap)
+
+clr1.data<-clr(g_data) 
+view(clr.data)
+
+
+names(clrf.data.pca)
+clrf1.data.pca <- prcomp(clrf.data.pca[,c(1:2)], center = TRUE, scale. = TRUE) 
+summary(clrf.data.pca) 
+
+
+str(clrf.data.pca)
+
+ggbiplot(clrf.data.pca)
+
+ggbiplot(clrf.data.pca, labels=rownames(clean_gheatmap))
+
+ggbiplot(clr.data.pca,ellipse=TRUE,choices=c(1,2), labels=rownames(g_data))
+```
