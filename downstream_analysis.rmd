@@ -1,6 +1,6 @@
 ################################################
 # 	
-#	  This R script is written by C. Q. Llenado 
+#	  This R script is written by C. Q. Llenado & Z.B. Lara.
 #
 #	  This script performs the visualization of the data from the previous pipeline.
 #		
