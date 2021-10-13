@@ -1,5 +1,16 @@
 #!/bin/bash 
 
+################################################################################################################################################
+# 	
+#	  This Bash script is written by Z.B. Lara.
+#
+#	  This script performs the pre-processing and intermediate steps for the Reads-Based Pipeline.
+#		
+#	  Usage:
+#		  Open in R Studio. Make sure the following packages are installed, and run the necessary code chunks.
+#
+################################################################################################################################################
+
 #insert SLURM/sbatch variables here if any
 
 ulimit -s unlimited 
