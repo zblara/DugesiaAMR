@@ -37,5 +37,6 @@ gtdbtk classify_wf --genome_dir /path/to/genome/directory --out_dir "$SAMPLE"_gt
 #Taxonomy classification of each MAG
 #Installation and GTDB-Tk database available at: https://ecogenomics.github.io/GTDBTk/installing/index.html
 
-abricate --db card "$SAMPLE"_bins/"$SAMPLE"_bin.* > "$SAMPLE".abricate.out
+abricate --db card "$SAMPLE"_bins/"$SAMPLE"_bin.** > "$SAMPLE".abricate.out
+#Run this step for each bin **
 #Screening of each MAG for AMR genes using CARD database (MEGARES was unavailable as of the writing)
