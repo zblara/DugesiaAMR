@@ -7,7 +7,7 @@
 #	  This script performs the pre-processing and intermediate steps for the Reads-Based Pipeline.
 #		
 #	  Usage:
-#		  Open in R Studio. Make sure the following packages are installed, and run the necessary code chunks.
+#		  Run in terminal of choice. Make sure the prerequesites are installed and the necessary files are present.
 #
 ################################################################################################################################################
 
