@@ -1,4 +1,4 @@
-################################################
+################################################################################################################################################
 # 	
 #	  This R script is written by C. Q. Llenado & Z.B. Lara.
 #
@@ -7,7 +7,7 @@
 #	  Usage:
 #		  Open in R Studio. Make sure the following packages are installed, and run the necessary code chunks.
 #
-################################################
+################################################################################################################################################
 
 ```{r}
 #Load Packages 
@@ -147,6 +147,7 @@ pairwise.wilcox.test(g.data.df$Abundance, g.data.df$Group,
 
 levels(g.data.df$Group)
 g.data.df$Group <- ordered(g.data.df$Group, levels = c("A16S", "ACN", "ANT3-DPRIME", "BC", "BLAZ", "CAP16S", "CEOB", "CPT", "CTPC", "DNAK", "EMBB", "GYRA", "GYRBA", "MEXF", "MLS23S", "MUXB", "O23S", "OPMH", "OTRB", "PARC", "PARE", "RPOB", "RPSA", "RRSA", "RRSC", "RRSH", "TET16S", "TUFAB", "VANRO", "VANSO", "VANXB"))
+#This is based on MEGARES nomenclature. You may add more based on results in CSV file
 ```
 
 ```{r}
@@ -168,6 +169,7 @@ ggboxplot(g.data.df, x = "Group", y = "Abundance",
                     "MUXB", "O23S", "OPMH", "OTRB", "PARC", "PARE", 
                     "RPOB", "RPSA", "RRSA", "RRSC", "RRSH", "TET16S", 
                     "TUFAB", "VANRO", "VANSO", "VANXB"),
+                    #This is based on MEGARES nomenclature. You may add more based on results in CSV file
           ylab = "Abundance", xlab = "Gene Group")
 ```
 
