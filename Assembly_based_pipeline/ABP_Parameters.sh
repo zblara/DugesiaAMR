@@ -30,10 +30,10 @@ metabat -i "$SAMPLE"_assembly/"$SAMPLE".contigs.fa -o  "$SAMPLE"_bins --sensitiv
 #Outputs individual Bins a.k.a. Metagenome-Assembled Genomes (MAGs)
 
 checkm lineage_wf "$SAMPLE"_bins "$SAMPLE"_bins_qc -t 8 &&\
-checkm qa "$SAMPLE"_bins/"$SAMPLE"_bin.1 "$SAMPLE"_bins_qc -o 1 &\
+checkm qa "$SAMPLE"_bins "$SAMPLE"_bins_qc -o 1 &&\
 #For QC of Bins. Manually check for each bin's quality based on output summary.
 
-gtdbtk classify_wf --genome_dir /path/to/genome/directory --out_dir "$SAMPLE"_gtdbtk --cpus 24 --extension fa --force
+gtdbtk classify_wf --genome_dir /path/to/genome/directory --out_dir "$SAMPLE"_gtdbtk --cpus 16 --extension fa --force &\
 #Taxonomy classification of each MAG
 
 abricate --db card "$SAMPLE"_bins/"$SAMPLE"_bin.1 > "$SAMPLE".abricate.out
