@@ -35,6 +35,7 @@ checkm qa "$SAMPLE"_bins "$SAMPLE"_bins_qc -o 1 &&\
 
 gtdbtk classify_wf --genome_dir /path/to/genome/directory --out_dir "$SAMPLE"_gtdbtk --cpus 16 --extension fa --force &\
 #Taxonomy classification of each MAG
+#Installation and GTDB-Tk database available at: https://ecogenomics.github.io/GTDBTk/installing/index.html
 
 abricate --db card "$SAMPLE"_bins/"$SAMPLE"_bin.1 > "$SAMPLE".abricate.out
 #Screening of each MAG for AMR genes using CARD database (MEGARES was unavailable as of the writing)
